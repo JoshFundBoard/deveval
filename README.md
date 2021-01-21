@@ -13,6 +13,8 @@ React Bootstrap is included in this file, but you should be able to complete the
 
 ### The Challenge
 
+You should *fork this project in your own GitHub directory. Do not submit PRs to this one.*
+
 Code is already in place to pull a menu of possible desserts from Airtable. You should do the following with it:
 
 1. Create a button for each dessert, in alphabetical order.
@@ -33,3 +35,7 @@ a. Create a reusable status component that can be used to show the status of the
 b. Add a button to toggle the dessert sorting from alphabetical to use the order field from Airtable. 
 
 c. After the user submits their choice, pop up a modal that shows their choice and the choices of other users. You can do a get from the /results endpoint to get all the results.
+
+### Submitting and Evaluation
+
+Once your personal fork of this repo is ready for review, contact us with the link to it. Details on how long you have to complete the challenge, and who to contact should be in the email you received with the link to this challenge.
