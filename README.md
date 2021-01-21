@@ -18,11 +18,12 @@ You should *fork this project in your own GitHub directory. Do not submit PRs to
 Code is already in place to pull a menu of possible desserts from Airtable. You should do the following with it:
 
 1. Create a button for each dessert, in alphabetical order.
-2. When a button is clicked, change it to a selected state (and example is provided).
-3. Allow the user to select up to 3 buttons. If they try to select a 4th button, show an error message instead.
-4. Add code so the input for collecting a user's name works.
-5. When the user clicks the save button their choices should be recorded in Airtable. The saga file already has a postChoices function for this, you just need to write the saga code to listen for the Redux action to trigger it, as well as the reducer code for it.
-6. Show a message for the current status of the save, any errors, and whether it succeeded. This can go wherever you like, next to the save button is fine.
+2. Make sure to only use valid data! At least one of the results from Airtable isn't usable.
+3. When a button is clicked, change it to a selected state (an example is provided).
+4. Allow the user to select up to 3 buttons. If they try to select a 4th button, show an error message instead. You can position the error message anywhere, at the top or bottom of the dessert buttons would be good.
+5. Add code so the input for collecting a user's name works.
+6. When the user clicks the save button their choices should be recorded in Airtable. The saga file already has a postChoices function for this, you just need to write the saga code to listen for the Redux action to trigger it, as well as the reducer code for it.
+7. Show a message for the current status of the save, any errors, and whether it succeeded. This can go wherever you like, next to the save button is fine.
 
 You're not being tested on your design skills, an example layout screenshot is provided in the imgs folder. But if you enjoy design feel free to add your own enhancements.
 
@@ -30,11 +31,13 @@ You're not being tested on your design skills, an example layout screenshot is p
 
 The above requirements are minimum we need to see for this challenge. If you would like to go farther, or if you want to demonstrate a higher level of experience, there are several additional steps you can take. These are strictly optional! 
 
-a. Create a reusable status component that can be used to show the status of the get and post calls. It should have a button to dismiss it after success. You may want to use the Alert and Spinner components from React Bootstrap.
+a. The current code retrieves labels and values for each dessert from Airtable, but only uses the values. You can enhance it by using each dessert's label for the button text, but saving the dessert values back to Airtable after the user selects their desserts and clicks the save button.
 
-b. Add a button to toggle the dessert sorting from alphabetical to use the order field from Airtable. 
+b. Create a reusable status component that can be used to show the status of the get and post calls. It should have a button to dismiss it after success. You may want to use the Alert and Spinner components from React Bootstrap.
 
-c. After the user submits their choice, pop up a modal that shows their choice and the choices of other users. You can do a get from the /results endpoint to get all the results.
+c. Add a button to toggle the dessert sorting from alphabetical to use the order field from Airtable. 
+
+d. After the user submits their choice, pop up a modal that shows their choice and the choices of other users. You can do a get from the /results endpoint to get all the results.
 
 ### Submitting and Evaluation
 
