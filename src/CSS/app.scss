@@ -1,0 +1,172 @@
+@import "../../node_modules/bootstrap/scss/bootstrap";
+@import 'utils';
+@import 'colors';
+@import 'vars';
+
+html#ov {
+  // override bootstrap styles
+  height: var(--app-height);
+
+  @media (min-width: $mediaLg) and (min-height: $mediaLg) {
+    font-size: 20px; //increase all fonts on large screens
+  }
+
+  body {
+    height: var(--app-height);
+    width: 100%;
+    position: fixed;
+    overflow: hidden;
+    margin: 0;
+    font-family: 'Nunito Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: $col-text;
+
+    #root {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      height: var(--app-height);
+
+      .nav {
+        display: flex;
+        align-items: center;
+        min-height: $navSz1; // only for smallest phones
+        padding: 0 $pad3;
+        order: 2; // nav on the bottom for mobile
+        background-color: $col-structure;
+        color: $col-text-light;
+
+        .navbar-nav {
+          flex-grow: 1;
+          font-size: 20px;
+          display: flex;
+          justify-content: space-around;
+
+          a.nav-link {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: fit-content;
+          }
+
+          a.nav-link,
+          .btn.navbar-btn {
+            flex-grow: 1;
+            color: inherit;
+
+            span {
+              display: none;
+              line-height: 1;
+              margin-left: 0.5em;
+            }
+
+            &:hover,
+            &:active,
+            &.active {
+              opacity: 0.4;
+              text-decoration: none;
+            }
+
+            &:focus {
+              font-weight: 700;
+              outline: none;
+              text-decoration: none;
+            }
+
+            &:disabled,
+            &.disabled,
+            &[aria-disabled="true"] {
+              opacity: 0.2;
+            }
+          }
+        }
+
+        .navBrand {
+          display: flex;
+          align-items: center;
+          text-decoration: none;
+        }
+
+        @media (min-width: $mediaXs) {
+          min-height: $navSz2;
+
+          .navbar-nav {
+            font-size: 38px;
+          }
+        }
+
+        @media (max-width: $mediaMaxMd) {
+          .navBrand {
+            .navLogo {
+              display: none;
+            }
+
+            .navName {
+              @include hidden();
+            }
+
+            .navVersion {
+              @include hidden();
+            }
+          }
+        }
+
+        @media (min-width: $mediaLg) {
+          order: 1;
+
+          .navLogo {
+            display: block;
+            width: 46px;
+            margin-right: 0.5em;
+          }
+
+          .navName {
+            display: inline;
+            font-size: 40px;
+            font-weight: 700;
+            text-decoration: none;
+            color: $col-text-light; // override link color
+          }
+
+          .navVersion {
+            display: inline;
+            font-size: $txSm;
+            align-self: baseline;
+            margin-left: 0.5em;
+            text-decoration: none;
+            color: $col-text-light; // override link color
+          }
+
+          .navbar-nav {
+            font-size: $h5;
+            justify-content: flex-end;
+
+            a.nav-link,
+            .btn.navbar-btn {
+              flex-grow: 0;
+              margin-right: 2em;
+
+              span {
+                display: inline-block;
+              }
+
+              &:last-child {
+                margin-right: 0;
+              }
+            }
+          }
+        }
+      }
+
+      #Main {
+        flex-grow: 1;
+        order: 1;
+        width: 100%;
+        margin: 0 auto; // center
+        position: relative;
+        overflow: auto;
+      }
+    }
+  }
+}

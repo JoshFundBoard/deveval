@@ -1,0 +1,598 @@
+$col-primary: #694494;
+$col-primary-light: scale_color($col-primary, $lightness: 20%);
+$col-primary-light2: scale_color($col-primary, $lightness: 30%);
+$col-primary-light3: scale_color($col-primary, $lightness: 40%);
+$col-primary-light4: scale_color($col-primary, $lightness: 50%);
+$col-primary-light5: scale_color($col-primary, $lightness: 60%);
+$col-primary-light6: scale_color($col-primary, $lightness: 70%);
+$col-primary-light7: scale_color($col-primary, $lightness: 80%);
+$col-primary-light8: scale_color($col-primary, $lightness: 90%);
+$col-primary-light9: scale_color($col-primary, $lightness: 95%);
+$col-primary-dark: scale_color($col-primary, $lightness: -20%);
+$col-primary-dark2: scale_color($col-primary, $lightness: -30%);
+$col-primary-dark3: scale_color($col-primary, $lightness: -40%);
+
+$col-secondary: #921A7F;
+$col-secondary-light: scale_color($col-secondary, $lightness: 20%);
+$col-secondary-light2: scale_color($col-secondary, $lightness: 30%);
+$col-secondary-light3: scale_color($col-secondary, $lightness: 40%);
+$col-secondary-light4: scale_color($col-secondary, $lightness: 50%);
+$col-secondary-light5: scale_color($col-secondary, $lightness: 60%);
+$col-secondary-light6: scale_color($col-secondary, $lightness: 70%);
+$col-secondary-dark: scale_color($col-secondary, $lightness: -20%);
+$col-secondary-dark2: scale_color($col-secondary, $lightness: -30%);
+
+$col-info: #1A847D;
+$col-info-light: scale_color($col-info, $lightness: 20%);
+$col-info-light2: scale_color($col-info, $lightness: 30%);
+$col-info-light3: scale_color($col-info, $lightness: 40%);
+$col-info-light4: scale_color($col-info, $lightness: 50%);
+$col-info-light5: scale_color($col-info, $lightness: 60%);
+$col-info-dark: scale_color($col-info, $lightness: -20%);
+$col-info-dark2: scale_color($col-info, $lightness: -30%);
+$col-info-op1: scale_color($col-info, $alpha: -10%);
+
+$col-success: #168333;
+$col-success-light: scale_color($col-success, $lightness: 20%);
+$col-success-light2: scale_color($col-success, $lightness: 30%);
+$col-success-light3: scale_color($col-success, $lightness: 40%);
+$col-success-light4: scale_color($col-success, $lightness: 50%);
+$col-success-dark: scale_color($col-success, $lightness: -20%);
+$col-success-dark2: scale_color($col-success, $lightness: -30%);
+
+$col-danger: #D73C41;
+$col-danger-light: scale_color($col-danger, $lightness: 20%);
+$col-danger-light2: scale_color($col-danger, $lightness: 30%);
+$col-danger-light3: scale_color($col-danger, $lightness: 40%);
+$col-danger-light4: scale_color($col-danger, $lightness: 50%);
+$col-danger-dark: scale_color($col-danger, $lightness: -20%);
+$col-danger-dark2: scale_color($col-danger, $lightness: -30%);
+
+$col-warning: #9D0034;
+$col-warning-light: scale_color($col-warning, $lightness: 20%);
+$col-warning-light2: scale_color($col-warning, $lightness: 30%);
+$col-warning-light3: scale_color($col-warning, $lightness: 40%);
+$col-warning-light4: scale_color($col-warning, $lightness: 50%);
+$col-warning-light5: scale_color($col-warning, $lightness: 60%);
+$col-warning-light6: scale_color($col-warning, $lightness: 70%);
+$col-warning-light7: scale_color($col-warning, $lightness: 80%);
+$col-warning-dark: scale_color($col-warning, $lightness: -20%);
+$col-warning-dark2: scale_color($col-warning, $lightness: -30%);
+$col-warning-op1: scale_color($col-warning, $alpha: -10%);
+$col-warning-op2: scale_color($col-warning, $alpha: -30%);
+$col-warning-op3: scale_color($col-warning, $alpha: -50%);
+
+$col-emp: #A0852A;
+$col-emp-light: scale_color($col-emp, $lightness: 20%);
+$col-emp-light2: scale_color($col-emp, $lightness: 30%);
+$col-emp-light3: scale_color($col-emp, $lightness: 40%);
+$col-emp-light4: scale_color($col-emp, $lightness: 50%);
+$col-emp-light5: scale_color($col-emp, $lightness: 60%);
+$col-emp-light6: scale_color($col-emp, $lightness: 70%);
+$col-emp-light7: scale_color($col-emp, $lightness: 80%);
+$col-emp-light8: scale_color($col-emp, $lightness: 90%);
+$col-emp-light9: scale_color($col-emp, $lightness: 95%);
+$col-emp-dark: scale_color($col-emp, $lightness: -20%);
+$col-emp-dark2: scale_color($col-emp, $lightness: -30%);
+
+$col-structure: #20133C;
+$col-structure-light: scale_color($col-structure, $lightness: 20%);
+$col-structure-light2: scale_color($col-structure, $lightness: 30%);
+$col-structure-light3: scale_color($col-structure, $lightness: 40%);
+$col-structure-light4: scale_color($col-structure, $lightness: 50%);
+$col-structure-light5: scale_color($col-structure, $lightness: 60%);
+$col-structure-light6: scale_color($col-structure, $lightness: 70%);
+$col-structure-light7: scale_color($col-structure, $lightness: 80%);
+
+$col-light: #f3f0f8;
+$col-light-dark: scale_color($col-light, $lightness: -20%);
+$col-light-dark2: scale_color($col-light, $lightness: -30%);
+$col-text: #20133C;
+$col-text-light: scale_color($col-structure, $lightness: 95%);
+$col-bright: #fff;
+
+$col-linkedin: #2867B2;
+$col-twitter: #1DA1F2;
+
+@mixin btn-colors($colP, $colD, $colL, $colT, $colTA) {
+  background-color: $colP !important;
+  color: $colT !important;
+
+  &:hover, &:focus {
+    background-color: $colD !important;
+    color: $colTA !important;
+  }
+
+  &.active {
+    background-color: $colL !important;
+    color: $colTA !important;
+  }
+
+  &:disabled {
+    background-color: $colP !important;
+    color: $colT !important;
+    opacity: 0.25;
+  }
+}
+
+@mixin btn-icon-colors($colP, $colD, $colL) {
+  color: $colP !important;
+  background-color: transparent !important;
+
+  &:hover, &:focus {
+    color: $colD !important;
+    background-color: transparent !important;
+  }
+
+  &.active {
+    color: $colL !important;
+    background-color: transparent !important;
+  }
+
+  &:disabled {
+    color: $colP !important;
+    opacity: 0.25;
+    background-color: transparent !important;
+  }
+}
+
+html#ov body {
+// override bootstrap styles
+
+  .text-primary {
+    color: $col-primary !important;
+  }
+
+  .text-primary-dark {
+    color: $col-primary-dark !important;
+  }
+
+  .text-primary-light {
+    color: $col-primary-light !important;
+  }
+
+  .text-primary-light3 {
+    color: $col-primary-light4 !important;
+  }
+
+  .text-secondary {
+    color: $col-secondary !important;
+  }
+
+  .text-secondary-dark {
+    color: $col-secondary-dark !important;
+  }
+
+  .text-success {
+    color: $col-success !important;
+  }
+
+  .text-danger {
+    color: $col-danger !important;
+  }
+
+  .text-warning {
+    color: $col-warning !important;
+  }
+
+  .text-info {
+    color: $col-info !important;
+  }
+
+  .text-info-ghost {
+    color: $col-info-light4 !important;
+  }
+
+  .text-emp {
+    color: $col-emp !important;
+  }
+
+  .text-light {
+    color: $col-light !important;
+  }
+
+  .text-linkedin {
+    color: $col-linkedin !important;
+  }
+
+  .text-twitter {
+    color: $col-twitter !important;
+  }
+
+  .bg-primary {
+    background-color: $col-primary !important;
+  }
+
+  .bg-primary-light {
+    background-color: $col-primary-light !important;
+  }
+
+  .bg-primary-light2 {
+    background-color: $col-primary-light2 !important;
+  }
+
+  .bg-primary-light3 {
+    background-color: $col-primary-light3 !important;
+  }
+
+  .bg-primary-light4 {
+    background-color: $col-primary-light4 !important;
+  }
+
+  .bg-primary-light5 {
+    background-color: $col-primary-light5 !important;
+  }
+
+  .bg-primary-light6 {
+    background-color: $col-primary-light6 !important;
+  }
+
+  .bg-primary-dark {
+    background-color: $col-primary-dark !important;
+  }
+
+  .bg-primary-dark2 {
+    background-color: $col-primary-dark2 !important;
+  }
+
+  .bg-secondary {
+    background-color: $col-secondary !important;
+  }
+
+  .bg-secondary-light {
+    background-color: $col-secondary-light !important;
+  }
+
+  .bg-secondary-light2 {
+    background-color: $col-secondary-light2 !important;
+  }
+
+  .bg-secondary-light3 {
+    background-color: $col-secondary-light3 !important;
+  }
+
+  .bg-secondary-light4 {
+    background-color: $col-secondary-light4 !important;
+  }
+
+  .bg-secondary-light5 {
+    background-color: $col-secondary-light5 !important;
+  }
+
+  .bg-secondary-light6 {
+    background-color: $col-secondary-light6 !important;
+  }
+
+  .bg-secondary-dark {
+    background-color: $col-secondary-dark !important;
+  }
+
+  .bg-secondary-dark2 {
+    background-color: $col-secondary-dark2 !important;
+  }
+
+  .bg-success {
+    background-color: $col-success !important;
+  }
+
+  .bg-success-light {
+    background-color: $col-success-light !important;
+  }
+
+  .bg-success-light2 {
+    background-color: $col-success-light2 !important;
+  }
+
+  .bg-success-light3 {
+    background-color: $col-success-light3 !important;
+  }
+
+  .bg-success-light4 {
+    background-color: $col-success-light4 !important;
+  }
+
+  .bg-success-dark {
+    background-color: $col-success-dark !important;
+  }
+
+  .bg-success-dark2 {
+    background-color: $col-success-dark2 !important;
+  }
+
+  .bg-danger {
+    background-color: $col-danger !important;
+  }
+
+  .bg-danger-light {
+    background-color: $col-danger-light !important;
+  }
+
+  .bg-danger-light2 {
+    background-color: $col-danger-light2 !important;
+  }
+
+  .bg-danger-light3 {
+    background-color: $col-danger-light3 !important;
+  }
+
+  .bg-danger-light4 {
+    background-color: $col-danger-light4 !important;
+  }
+
+  .bg-danger-dark {
+    background-color: $col-danger-dark !important;
+  }
+
+  .bg-danger-dark2 {
+    background-color: $col-danger-dark2 !important;
+  }
+
+  .bg-warning {
+    background-color: $col-warning !important;
+  }
+
+  .bg-warning-light {
+    background-color: $col-warning-light !important;
+  }
+
+  .bg-warning-light2 {
+    background-color: $col-warning-light2 !important;
+  }
+
+  .bg-warning-light3 {
+    background-color: $col-warning-light3 !important;
+  }
+
+  .bg-warning-light4 {
+    background-color: $col-warning-light4 !important;
+  }
+
+  .bg-warning-dark {
+    background-color: $col-warning-dark !important;
+  }
+
+  .bg-warning-dark2 {
+    background-color: $col-warning-dark2 !important;
+  }
+
+  .bg-info {
+    background-color: $col-info !important;
+  }
+
+  .bg-info-light {
+    background-color: $col-info-light !important;
+  }
+
+  .bg-info-light2 {
+    background-color: $col-info-light2 !important;
+  }
+
+  .bg-info-light3 {
+    background-color: $col-info-light3 !important;
+  }
+
+  .bg-info-light4 {
+    background-color: $col-info-light4 !important;
+  }
+
+  .bg-info-dark {
+    background-color: $col-info-dark !important;
+  }
+
+  .bg-info-dark2 {
+    background-color: $col-info-dark2 !important;
+  }
+
+  .bg-emp {
+    background-color: $col-emp !important;
+  }
+
+  .bg-emp-light {
+    background-color: $col-emp-light !important;
+  }
+
+  .bg-emp-light2 {
+    background-color: $col-emp-light2 !important;
+  }
+
+  .bg-emp-light3 {
+    background-color: $col-emp-light3 !important;
+  }
+
+  .bg-emp-light4 {
+    background-color: $col-emp-light4 !important;
+  }
+
+  .bg-emp-dark {
+    background-color: $col-emp-dark !important;
+  }
+
+  .bg-emp-dark2 {
+    background-color: $col-emp-dark2 !important;
+  }
+
+  .bg-structure {
+    background-color: $col-structure !important;
+  }
+
+  .bg-structure-light {
+    background-color: $col-structure-light !important;
+  }
+
+  .bg-structure-light2 {
+    background-color: $col-structure-light2 !important;
+  }
+
+  .bg-structure-light3 {
+    background-color: $col-structure-light3 !important;
+  }
+
+  .bg-structure-light4 {
+    background-color: $col-structure-light4 !important;
+  }
+
+  .bg-transparent {
+    background-color: transparent !important;
+  }
+
+  .bg-light {
+    background-color: $col-light !important;
+  }
+
+  .bg-light-dark {
+    background-color: $col-light-dark !important;
+  }
+
+  .bg-light-dark2 {
+    background-color: $col-light-dark2 !important;
+  }
+
+  .bd-primary-dark {
+    border-color: $col-primary-dark !important;
+  }
+
+  .bd-info-dark {
+    border-color: $col-info-dark !important;
+  }
+
+  .btn-primary, .badge-primary {
+    @include btn-colors($col-primary, $col-primary-dark, $col-primary-light2, $col-text-light, $col-primary-light5);
+  }
+
+  .btn-primary-light, .badge-primary-light {
+    @include btn-colors($col-primary-light, $col-primary, $col-primary-light3, $col-text-light, $col-primary-light5);
+  }
+
+  .btn-outline-primary {
+    border-width: 1px;
+    border-style: solid;
+    @include btn-colors(transparent, $col-primary, $col-primary-light2, $col-primary, $col-primary-light4);
+  }
+
+  .btn-secondary, .badge-secondary {
+    @include btn-colors($col-secondary, $col-secondary-dark, $col-secondary-light2, $col-text-light, $col-secondary-light6);
+  }
+
+  .btn-outline-secondary {
+    border-width: 1px;
+    border-style: solid;
+    @include btn-colors(transparent, $col-secondary, $col-secondary-light2, $col-secondary, $col-light);
+  }
+
+  .btn-danger, .badge-danger {
+    @include btn-colors($col-danger, $col-danger-dark, $col-danger-light2, $col-text-light, $col-light);
+  }
+
+  .btn-danger-light, .badge-danger-light {
+    @include btn-colors($col-danger-light, $col-danger, $col-danger-light3, $col-text-light, $col-light);
+  }
+
+  .btn-outline-danger {
+    border-width: 1px;
+    border-style: solid;
+    @include btn-colors(transparent, $col-danger, $col-danger-light2, $col-danger, $col-light);
+  }
+
+  .btn-warning, .badge-warning {
+    @include btn-colors($col-warning, $col-warning-dark, $col-warning-light2, $col-text-light, $col-light);
+  }
+
+  .btn-outline-warning {
+    @include btn-colors($col-light, $col-warning, $col-warning-light2, $col-warning, $col-light);
+  }
+
+  .btn-success, .badge-success {
+    @include btn-colors($col-success, $col-success-dark, $col-success-light2, $col-text-light, $col-light);
+  }
+
+  .btn-outline-success {
+    border-width: 1px;
+    border-style: solid;
+    @include btn-colors($col-light, $col-success, $col-success-light2, $col-success, $col-light);
+  }
+
+  .btn-info, .badge-info {
+    @include btn-colors($col-info, $col-info-dark, $col-info-light2, $col-text-light, $col-light);
+  }
+
+  .btn-outline-info {
+    @include btn-colors(transparent, $col-info, $col-info-light2, $col-info, $col-light);
+  }
+
+  .btn-emp, .badge-emp {
+    @include btn-colors($col-emp, $col-emp-dark, $col-emp-light2, $col-text-light, $col-light);
+  }
+
+  .btn-outline-emp {
+    border-width: 1px;
+    border-style: solid;
+    @include btn-colors(transparent, $col-emp, $col-emp-light2, $col-emp, $col-light);
+  }
+
+  .btn-light, .badge-light {
+    @include btn-colors($col-light, $col-light-dark, $col-light-dark2, $col-text, $col-text);
+  }
+
+  .btn-text {
+    @include btn-colors(transparent, transparent, transparent, $col-text, $col-primary-light);
+  }
+
+  .btn-text-light {
+    @include btn-colors(transparent, transparent, transparent, $col-text-light, $col-primary-light4);
+  }
+
+  .btn-icon-primary {
+    @include btn-icon-colors($col-primary, $col-primary-dark, $col-primary-light2);
+  }
+
+  .btn-icon-secondary {
+    @include btn-icon-colors($col-secondary, $col-secondary-dark, $col-secondary-light2);
+  }
+
+  .btn-icon-danger {
+    @include btn-icon-colors($col-danger, $col-danger-dark, $col-danger-light2);
+  }
+
+  .btn-icon-warning {
+    @include btn-icon-colors($col-warning, $col-warning-dark, $col-warning-light2);
+  }
+
+  .btn-icon-success {
+    @include btn-icon-colors($col-success, $col-success-dark, $col-success-light2);
+  }
+
+  .btn-icon-info {
+    @include btn-icon-colors($col-info, $col-info-dark, $col-info-light2);
+  }
+
+  .btn-icon-emp {
+    @include btn-icon-colors($col-emp, $col-emp-dark, $col-emp-light2);
+  }
+
+  .btn-icon-light {
+    @include btn-icon-colors($col-light, $col-light-dark, $col-light-dark2);
+  }
+
+  input.form-control,
+  textarea.form-control {
+    border-color: $col-primary;
+  }
+
+  .input-group .input-group-prepend .input-group-text {
+    border-color: $col-primary;
+    background-color: $col-text-light;
+    color: $col-primary;
+  }
+
+  .shadow-big {
+    box-shadow: 0 30px 70px 0 rgba(226, 232, 236, 0.6);
+  }
+
+  .shadow-med {
+    box-shadow: 0 20px 60px rgba(36, 130, 86, 0.25);
+  }
+
+  .gradient1 {
+    background-image: linear-gradient(266deg, #0cc16b, #96eb8e);
+  }
+}

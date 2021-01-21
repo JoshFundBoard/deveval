@@ -1,0 +1,561 @@
+@import 'colors.scss';
+@import 'vars.scss';
+
+@mixin hidden {
+  position: absolute;
+  overflow: hidden;
+  left: -100000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+}
+
+@mixin link {
+  text-decoration: underline;
+  color: $col-primary;
+  outline: 0;
+
+  &:hover,
+  &:active,
+  &:focus {
+    color: $col-primary-dark3;
+    text-decoration: none;
+  }
+}
+
+html#ov body {
+  // override bootstrap styles
+
+  a {
+    @include link();
+  }
+
+  .txLink { // use for non-anchor interactive elements styled like links
+    @include link();
+    cursor: pointer;
+  }
+
+  .clickable {
+    cursor: pointer;
+  }
+
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: $pad3;
+    max-width: $maxBtn;
+    font-size: $h5;
+    padding: $pad2 $pad3;
+    text-decoration: none;
+    border: 0 none;
+
+    @media (min-width: $mediaXs) {
+      font-size: $h4;
+      padding: $pad2 $pad3;
+    }
+  }
+
+  .btn.btnOutline {
+    border-width: 1px;
+    border-style: solid;
+  }
+
+  .btn.btn-text,
+  .btn.btn-text-light {
+    padding: 0;
+    max-width: none;
+
+    @media (min-width: $mediaXs) {
+      font-size: $tx;
+      padding: 0;
+    }
+  }
+
+  .btn.btn-link {
+    padding: 0;
+    border-width: 0;
+    border-radius: 0;
+    background-color: transparent !important;
+    font-size: 1em;
+    line-height: 1.2em;
+    max-width: none;
+    text-decoration: underline;
+    text-align: start;
+
+    &:hover {
+      background-color: transparent !important;
+    }
+
+    @include link();
+  }
+
+  .btnNoMax {
+    max-width: none;
+  }
+
+  .btnResponsiveMax {
+    max-width: none;
+
+    @media (min-width: $mediaLg) {
+      max-width: $maxBtn;
+    }
+  }
+
+  .btnMobile100 {
+    max-width: none;
+    width: 100%;
+
+    @media (min-width: $mediaLg) {
+      width: auto;
+    }
+  }
+
+  .btn.iconBtn {
+    // for buttons that are only icons
+    // use font size to control the size
+    background-color: transparent;
+    border-color: transparent;
+    padding: 0;
+    border-radius: 0;
+    font-size: 1em;
+    line-height: 1em;
+    flex-shrink: 0;
+  }
+
+  .btn.inlineBtn {
+    display: inline-block;
+    font-size: 0.6em;
+    line-height: 0.6em;
+    padding: 0.5em 0.8em;
+    max-width: none;
+
+    &.btn-link,
+    &.btn-text {
+      font-size: inherit;
+      line-height: inherit;
+      padding: 0;
+    }
+  }
+
+  .input-group > .input-group-append > .btn {
+    border-radius: $pad1;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .input-group > .input-group-prepend > .btn {
+    border-radius: $pad1;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .input-group > .input-group-append > .btn,
+  .input-group > .input-group-prepend > .btn {
+    font-size: inherit;
+    padding: .375rem .75rem;
+  }
+
+  .iconDisc {
+    // for icons in a circle that are not buttons. Assumes a FontAwesome SVG inside it.
+    // give a bg class for color
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    height: 2em;
+    width: 2em;
+    font-size: 0.75em;
+    color: $col-text-light;
+    border-radius: 50%;
+
+    .iconDiscOverlay {
+      // 2nd icon to overlay the first one.
+      position: absolute;
+      width: 2em;
+      height: 2em;
+    }
+  }
+
+  .input-radius {
+    border-radius: $pad2;
+  }
+
+  .form-check {
+    padding-left: 0;
+  }
+
+  input[type=text] {
+    font-size: $tx;
+
+    @media (min-width: $mediaXs) {
+      font-size: $h3;
+    }
+  }
+
+  input[type="checkbox"] {
+    opacity: 0;
+    position: absolute;
+    left: -9999px;
+  }
+
+  input[type="checkbox"] + label,
+  .fauxCheckBox {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding-left: 2.5em;
+    height: 2em;
+
+    &::before,
+    &::after {
+      position: absolute;
+      content: "";
+      display: inline-block;
+    }
+
+    &::before{
+      height: 2em;
+      width: 2em;
+      border-radius: $pad2;
+      border: 1px solid $col-primary;
+      background-color: #fff;
+      left: 0;
+      top: 0;
+    }
+
+    &::after {
+      height: 0.7em;
+      width: 1.25em;
+      border-left: 4px solid #694494;
+      border-bottom: 4px solid #694494;
+      transform: rotate(-45deg);
+      left: 7px;
+      top: 9px;
+      content: none;
+    }
+  }
+
+  input[type="checkbox"]:checked + label::after,
+  .fauxCheckBox.checked::after,
+  .fauxCheckBox:hover::after {
+    content: "";
+  }
+
+  input[type="checkbox"]:focus + label::before {
+    outline: rgb(59, 153, 252) auto 5px;
+  }
+
+  .fauxCheckBox {
+    border: none;
+    background: none;
+  }
+
+  input[type="radio"] {
+    position: absolute;
+    left: -9999px;
+  }
+
+  input[type="radio"] + label {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  input[type="radio"] + label:before {
+    content: '';
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    margin-right: 0.5em;
+    border-radius: 50%;
+    border: 2px solid $col-primary;
+  }
+
+  input[type="radio"]:checked + label:before {
+    background-color: $col-primary;
+  }
+
+  form {
+    .form-check-input.is-valid ~ .form-check-label,
+    &.was-validated .form-check-input:valid ~ .form-check-label {
+      color: inherit;
+    }
+    .endOfRowWithLabelBtn {
+      margin-top: 1.75rem;
+      height: calc(1.5em + .75rem + 2px);
+      font-size: $h3;
+    }
+
+  }
+
+  .noTextOverflow {
+    display: block;
+    overflow: hidden;
+    text-wrap: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  h1, .h1 {
+    font-size: $h1;
+    font-weight: 700;
+  }
+
+  h2, .h2 {
+    font-size: $h2;
+    font-weight: 700;
+  }
+
+  h3, .h3 {
+    font-size: $h3;
+    font-weight: 700;
+  }
+
+  h4, .h4 {
+    font-size: $h4;
+    font-weight: 700;
+  }
+
+  h5, .h5 {
+    font-size: $h5;
+    font-weight: 700;
+  }
+
+  .unbold {
+    font-weight: 400;
+  }
+
+  .txs-3 {
+    font-size: $tx;
+  }
+
+  .txs-2 {
+    font-size: $txMd;
+  }
+
+  .txs-1 {
+    font-size: $txSm;
+  }
+
+  .h-xs-3 {
+    @media (min-width: $mediaXs) {
+      font-size: $h3;
+    }
+  }
+
+  .h-sm-4 {
+    @media (min-width: $mediaSm) {
+      font-size: $h4;
+    }
+  }
+
+  .h-sm-3 {
+    @media (min-width: $mediaSm) {
+      font-size: $h3;
+    }
+  }
+
+  .h-sm-2 {
+    @media (min-width: $mediaSm) {
+      font-size: $h2;
+    }
+  }
+
+  .h-md-2 {
+    @media (min-width: $mediaMd) {
+      font-size: $h2;
+    }
+  }
+
+  .h-lg-5 {
+    @media (min-width: $mediaLg) {
+      font-size: $h5;
+    }
+  }
+
+  .h-lg-3 {
+    @media (min-width: $mediaLg) {
+      font-size: $h3;
+    }
+  }
+
+  .h-lg-2 {
+    @media (min-width: $mediaLg) {
+      font-size: $h2;
+    }
+  }
+
+  .h-lg-1 {
+    @media (min-width: $mediaLg) {
+      font-size: $h1;
+    }
+  }
+
+  .txs-lg-1 {
+    @media (min-width: $mediaLg) {
+      font-size: $txSm;
+    }
+  }
+
+  .txs-lg-2 {
+    @media (min-width: $mediaLg) {
+      font-size: $txMd;
+    }
+  }
+
+  .txs-md-tx3 {
+    @media (min-width: $mediaMd) {
+      font-size: $tx;
+    }
+  }
+
+  .txs-lg-tx3 {
+    @media (min-width: $mediaLg) {
+      font-size: $tx;
+    }
+  }
+
+  .sectionHead {
+    padding-bottom: $pad1;
+    border-bottom: 2px solid $col-primary-light6;
+  }
+
+  .responsiveImg {
+    width: 100%;
+    height: auto;
+  }
+
+  .inlineImg {
+    height: 1em;
+    width: auto;
+  }
+
+  .clamp2 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp:2;
+    overflow: hidden;
+  }
+
+  .clamp3 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp:3;
+    overflow: hidden;
+  }
+
+  .gutter {
+    // use on elements with d-flex
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .gutter-1 {
+    @extend .gutter;
+
+    & > * {
+      margin-right: 0.25rem;
+    }
+  }
+
+  .gutter-2 {
+    @extend .gutter;
+
+    & > * {
+      margin-right: 0.5rem;
+    }
+  }
+
+  .gutter-3 {
+    @extend .gutter;
+
+    & > * {
+      margin-right: 1rem;
+    }
+  }
+
+  .gutter-4 {
+    @extend .gutter;
+
+    & > * {
+      margin-right: 1.5rem;
+    }
+  }
+
+  .gutter-5 {
+    @extend .gutter;
+
+    & > * {
+      margin-right: 3rem;
+    }
+  }
+
+  .flex-column {
+
+    &.gutter {
+      & > * {
+        margin-right: 0;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    &.gutter-1 {
+      @extend .gutter;
+
+      & > * {
+        margin-bottom: 0.25rem;
+      }
+    }
+
+    &.gutter-2 {
+      @extend .gutter;
+
+      & > * {
+        margin-bottom: 0.5rem;
+      }
+    }
+
+    &.gutter-3 {
+      @extend .gutter;
+
+      & > * {
+        margin-bottom: 1rem;
+      }
+    }
+
+    &.gutter-4 {
+      @extend .gutter;
+
+      & > * {
+        margin-bottom: 1.5rem;
+      }
+    }
+
+    &.gutter-5 {
+      @extend .gutter;
+
+      & > * {
+        margin-bottom: 3rem;
+      }
+    }
+  }
+
+  .hidden {
+    @include hidden();
+  }
+
+  .op-1 {
+    opacity: 0.3;
+  }
+
+  @media (min-width: $mediaXs) {
+    .d-xs-inline {
+      display: inline!important;
+    }
+  }
+}

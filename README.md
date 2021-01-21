@@ -1,68 +1,35 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+## FundBoard Dev Test
 
-## Available Scripts
+This is a (hopefully) fun, short development challenge intended to gauge your experience level with the kind of code we use every day at FundBoard.
 
-In the project directory, you can run:
+The primary skills we're testing, in addition to core HTML, CSS and JavaScript, are:
+- React
+- Redux
+- ES6
 
-### `yarn start`
+This project does use Sagas and the Airtable API, but working example code has been provided. You should be able to modify it without much trouble.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+React Bootstrap is included in this file, but you should be able to complete the challenge using only the provided example components. FontAwesome icons are also provided, but not used. You are free to explore and use either or both.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### The Challenge
 
-### `yarn test`
+Code is already in place to pull a menu of possible desserts from Airtable. You should do the following with it:
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Create a button for each dessert, in alphabetical order.
+2. When a button is clicked, change it to a selected state (and example is provided).
+3. Allow the user to select up to 3 buttons. If they try to select a 4th button, show an error message instead.
+4. Add code so the input for collecting a user's name works.
+5. When the user clicks the save button their choices should be recorded in Airtable. The saga file already has a postChoices function for this, you just need to write the saga code to listen for the Redux action to trigger it, as well as the reducer code for it.
+6. Show a message for the current status of the save, any errors, and whether it succeeded. This can go wherever you like, next to the save button is fine.
 
-### `yarn build`
+You're not being tested on your design skills, an example layout screenshot is provided in the imgs folder. But if you enjoy design feel free to add your own enhancements.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Going Farther
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+The above requirements are minimum we need to see for this challenge. If you would like to go farther, or if you want to demonstrate a higher level of experience, there are several additional steps you can take. These are strictly optional! 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+a. Create a reusable status component that can be used to show the status of the get and post calls. It should have a button to dismiss it after success. You may want to use the Alert and Spinner components from React Bootstrap.
 
-### `yarn eject`
+b. Add a button to toggle the dessert sorting from alphabetical to use the order field from Airtable. 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+c. After the user submits their choice, pop up a modal that shows their choice and the choices of other users. You can do a get from the /results endpoint to get all the results.
