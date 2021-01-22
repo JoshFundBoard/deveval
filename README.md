@@ -29,15 +29,7 @@ You're not being tested on your design skills, an example layout screenshot is p
 
 ### Going Farther
 
-The above requirements are all we need to see for this challenge. If you would like to go farther, you can add any enhancements you'd like to the code. Below are a few suggestions.
-
-a. Use the lables being returned from Airtable for the desserts.
-
-b. Add the ability to toggle the order of the desserts to be alphabetical or by the order value returned from Airtable.
-
-c. Make some reusable components. Something to show the status of calls is an option.
-
-d. Do something with the recorded results. You can make a GET call to the same endpoint as the postChoices function to retrieve them.
+The above requirements are all we need to see for this challenge, but you might notice there are areas in the code that could use some improvement. If you see one, by all means fix it up! 
 
 ### Submitting and Evaluation
 
