@@ -29,15 +29,15 @@ You're not being tested on your design skills, an example layout screenshot is p
 
 ### Going Farther
 
-The above requirements are minimum we need to see for this challenge. If you would like to go farther, or if you want to demonstrate a higher level of experience, there are several additional steps you can take. These are strictly optional! 
+The above requirements are all we need to see for this challenge. If you would like to go farther, you can add any enhancements you'd like to the code. Below are a few suggestions.
 
-a. The current code retrieves labels and values for each dessert from Airtable, but only uses the values. You can enhance it by using each dessert's label for the button text, but saving the dessert values back to Airtable after the user selects their desserts and clicks the save button.
+a. Use the lables being returned from Airtable for the desserts.
 
-b. Create a reusable status component that can be used to show the status of the get and post calls. It should have a button to dismiss it after success. You may want to use the Alert and Spinner components from React Bootstrap.
+b. Add the ability to toggle the order of the desserts to be alphabetical or by the order value returned from Airtable.
 
-c. Add a button to toggle the dessert sorting from alphabetical to use the order field from Airtable. 
+c. Make some reusable components. Something to show the status of calls is an option.
 
-d. After the user submits their choice, pop up a modal that shows their choice and the choices of other users. You can do a get from the /results endpoint to get all the results.
+d. Do something with the recorded results. You can make a GET call to the same endpoint as the postChoices function to retrieve them.
 
 ### Submitting and Evaluation
 
