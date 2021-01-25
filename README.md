@@ -1,6 +1,6 @@
 ## FundBoard Dev Test
 
-This is a (hopefully) fun, short development challenge intended to gauge your experience level with the kind of code we use every day at FundBoard.
+This is a (hopefully) fun, short development challenge intended to gauge your experience level with the kind of code we use every day at FundBoard. If you complete it, we will send you a $50 gift card of your choice.
 
 The primary skills we're testing, in addition to core HTML, CSS and JavaScript, are:
 - React
