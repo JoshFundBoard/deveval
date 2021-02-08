@@ -15,6 +15,8 @@ React Bootstrap is included in this file, but you should be able to complete the
 
 You should *fork this project in your own GitHub directory. Do not submit PRs to this one.*
 
+Use a **private** project so other candidates aren't influenced by your work.
+
 Code is already in place to pull a menu of possible desserts from Airtable. You should do the following with it:
 
 1. Create a button for each dessert, in alphabetical order.
@@ -33,4 +35,4 @@ The above requirements are all we need to see for this challenge, but you might 
 
 ### Submitting and Evaluation
 
-Once your personal fork of this repo is ready for review, contact us with the link to it. Details on how long you have to complete the challenge, and who to contact should be in the email you received with the link to this challenge.
+Once your private personal fork of this repo is ready for review, invite us as a collaborator and contact us with the link to it. Details on how long you have to complete the challenge, and who to contact should be in the email you received with the link to this challenge.
