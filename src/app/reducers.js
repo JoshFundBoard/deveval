@@ -35,6 +35,24 @@ export default function rootReducer(state = defaults, action) {
       get_status: '',
       // This is so you can dismiss status alerts
     };
+    case types.POST_CHOICES_REQUESTED: return {
+      ...state,
+      post_status: 'pending',
+    };
+    case types.POST_CHOICES_SUCCEEDED:
+      return {
+        ...state,
+        post_status: 'succeeded',
+        dessertChoices: action.data.records.map(r => r.fields),
+      };
+    case types.POST_CHOICES_FAILED: return {
+      ...state,
+      post_status: processErr(action.error),
+    };
+    case types.POST_CHOICES_DISMISSED: return {
+      ...state,
+      post_status: '',
+    };
     default: return state;
   }
 }
