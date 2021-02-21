@@ -43,3 +43,15 @@ export function getSafeVar(fn, defaultVal) {
     return defaultVal; // will be undefined if not passed in, which is intentional.
   }
 }
+
+export function displayWarning(elRef) {
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+  async function showWarning() {
+    elRef.current.classList.remove('hide-content');
+    await sleep(1500);
+    elRef.current.classList.add('hide-content');
+  }
+  showWarning();
+}

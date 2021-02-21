@@ -167,6 +167,21 @@ html#ov {
         position: relative;
         overflow: auto;
       }
+
+      .error-message {
+        position: fixed;
+        width: 100vw;
+        text-align: center;
+        font-weight: bold;
+        font-size: 1.2rem;
+        padding: 10px 0;
+        background-color: rgba(252, 4, 4, 0.824);
+        z-index: 1;
+      }
+
+      .hide-content {
+        display: none;
+      }
     }
   }
 }

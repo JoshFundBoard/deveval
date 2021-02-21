@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch, Provider } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import Navbar from 'react-bootstrap/Navbar';
@@ -16,6 +16,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import Logo from './imgs/FundBoard_Logo.svg';
 import store from './app/store';
+import { displayWarning } from './app/utils';
 import * as types from './app/actionTypes';
 
 library.add(
@@ -30,8 +31,8 @@ function App() {
   const desserts = useSelector(state => state.getAirtable.desserts) || [];
   const chosenDesserts = useSelector(state => state.desserts.chosenDesserts);
   const userName = useSelector(state => state.user.user);
-  console.log(desserts); // just here so eslint doesn't complain. And handy for debugging.
 
+  const messageRef = useRef();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -51,6 +52,8 @@ function App() {
         type: types.ADD_DESSERT,
         chosenDessert: e.target.value,
       });
+    } else {
+      displayWarning(messageRef);
     }
   };
 
@@ -70,15 +73,7 @@ function App() {
         </a>
       </Navbar>
       <main id="Main">
-        <div className="user-status">
-          <h3>{userName || 'Enter Your Name'}</h3>
-          <ul>
-            {chosenDesserts.length === 0 && 'You have no desserts selected'}
-            {chosenDesserts.map(dessert => (
-              <li key={uuidv4()}>{dessert}</li>
-            ))}
-          </ul>
-        </div>
+        <p className="error-message hide-content" ref={messageRef}>You may only choose 3 desserts.</p>
         <div className="container-xl">
           <Row>
             <Col>
