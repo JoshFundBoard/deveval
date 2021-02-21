@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch, Provider } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 import Navbar from 'react-bootstrap/Navbar';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -37,6 +38,10 @@ function App() {
     });
   }, [dispatch]);
 
+  const handleButtonClick = e => {
+    console.log(e.target.value);
+  };
+
   return (
     <Provider store={store}>
       <Navbar className="nav">
@@ -63,6 +68,23 @@ function App() {
                 {`Get Status: ${getStatus}`}
               </div>
               <div className="d-flex flex-wrap">
+                {desserts.length && (
+                  desserts.sort().map(dessert => (
+                    dessert
+                      ? (
+                        <Button
+                          key={uuidv4()}
+                          // variant={chosenDesserts.indexOf(dessert) === -1 ? 'info' : 'secondary'}
+                          onClick={handleButtonClick}
+                          value={dessert}
+                          className="w-100 btnNoMax mb-w"
+                        >
+                          {dessert}
+                        </Button>
+                      )
+                      : ''
+                  ))
+                )}
                 <Button
                   variant="info"
                   className="w-100 btnNoMax mb-2"
