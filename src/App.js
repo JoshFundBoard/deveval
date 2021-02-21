@@ -29,6 +29,7 @@ function App() {
   const getStatus = useSelector(state => state.getAirtable.get_status);
   const desserts = useSelector(state => state.getAirtable.desserts) || [];
   const chosenDesserts = useSelector(state => state.desserts.chosenDesserts);
+  const userName = useSelector(state => state.user.user);
   console.log(desserts); // just here so eslint doesn't complain. And handy for debugging.
 
   const dispatch = useDispatch();
@@ -40,7 +41,6 @@ function App() {
   }, [dispatch]);
 
   const handleButtonClick = e => {
-    console.log(e.target.value);
     if (chosenDesserts.indexOf(e.target.value) !== -1) {
       dispatch({
         type: types.REMOVE_DESSERT,
@@ -54,6 +54,13 @@ function App() {
     }
   };
 
+  const handleNameChange = e => {
+    dispatch({
+      type: types.SET_NAME,
+      user: e.target.value,
+    });
+  };
+
   return (
     <Provider store={store}>
       <Navbar className="nav">
@@ -63,6 +70,15 @@ function App() {
         </a>
       </Navbar>
       <main id="Main">
+        <div className="user-status">
+          <h3>{userName || 'Enter Your Name'}</h3>
+          <ul>
+            {chosenDesserts.length === 0 && 'You have no desserts selected'}
+            {chosenDesserts.map(dessert => (
+              <li key={uuidv4()}>{dessert}</li>
+            ))}
+          </ul>
+        </div>
         <div className="container-xl">
           <Row>
             <Col>
@@ -97,23 +113,12 @@ function App() {
                       : ''
                   ))
                 )}
-                <Button
-                  variant="info"
-                  className="w-100 btnNoMax mb-2"
-                >
-                  Example button
-                </Button>
-                <Button
-                  variant="secondary"
-                  className="w-100 btnNoMax mb-2"
-                >
-                  Example selected button
-                </Button>
               </div>
               <InputGroup className="mb-2 p-1">
                 <FormControl
                   type="text"
-                  value=""
+                  onChange={handleNameChange}
+                  value={userName}
                   placeholder="Enter your name"
                   aria-label="Enter your name"
                 />

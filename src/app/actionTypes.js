@@ -5,3 +5,5 @@ export const AIRTABLE_GET_DISMISSED = 'AIRTABLE_GET_DISMISSED';
 
 export const ADD_DESSERT = 'ADD_DESSERT';
 export const REMOVE_DESSERT = 'REMOVE_DESSERT';
+
+export const SET_NAME = 'SET_NAME';

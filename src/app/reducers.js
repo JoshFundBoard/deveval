@@ -11,9 +11,21 @@ const resets = {
 
 const defaults = {
   ...resets,
-  name: '',
+  user: '',
   chosenDesserts: [],
 };
+
+function userReducer(state = defaults, action) {
+  switch (action.type) {
+    case types.SET_NAME:
+      return {
+        ...state,
+        user: action.user,
+      };
+    default:
+      return state;
+  }
+}
 
 function dessertsReducer(state = defaults, action) {
   switch (action.type) {
@@ -61,6 +73,7 @@ function getAirtableReducer(state = defaults, action) {
 const rootReducer = combineReducers({
   getAirtable: getAirtableReducer,
   desserts: dessertsReducer,
+  user: userReducer,
 });
 
 export default rootReducer;
