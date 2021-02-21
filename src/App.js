@@ -26,8 +26,9 @@ library.add(
 );
 
 function App() {
-  const getStatus = useSelector(state => state.get_status);
-  const desserts = useSelector(state => state.desserts) || [];
+  const getStatus = useSelector(state => state.getAirtable.get_status);
+  const desserts = useSelector(state => state.getAirtable.desserts) || [];
+  const chosenDesserts = useSelector(state => state.desserts.chosenDesserts);
   console.log(desserts); // just here so eslint doesn't complain. And handy for debugging.
 
   const dispatch = useDispatch();
@@ -40,6 +41,17 @@ function App() {
 
   const handleButtonClick = e => {
     console.log(e.target.value);
+    if (chosenDesserts.indexOf(e.target.value) !== -1) {
+      dispatch({
+        type: types.REMOVE_DESSERT,
+        chosenDessert: e.target.value,
+      });
+    } else if (chosenDesserts.length < 3) {
+      dispatch({
+        type: types.ADD_DESSERT,
+        chosenDessert: e.target.value,
+      });
+    }
   };
 
   return (
@@ -74,7 +86,7 @@ function App() {
                       ? (
                         <Button
                           key={uuidv4()}
-                          // variant={chosenDesserts.indexOf(dessert) === -1 ? 'info' : 'secondary'}
+                          variant={chosenDesserts.indexOf(dessert) === -1 ? 'info' : 'secondary'}
                           onClick={handleButtonClick}
                           value={dessert}
                           className="w-100 btnNoMax mb-w"

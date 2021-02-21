@@ -1,3 +1,4 @@
+import { combineReducers } from 'redux';
 import * as types from './actionTypes';
 import {
   processErr,
@@ -10,10 +11,28 @@ const resets = {
 
 const defaults = {
   ...resets,
-  // add any other defaults that shouldn't reset here.
+  name: '',
+  chosenDesserts: [],
 };
 
-export default function rootReducer(state = defaults, action) {
+function dessertsReducer(state = defaults, action) {
+  switch (action.type) {
+    case types.ADD_DESSERT:
+      return {
+        ...state,
+        chosenDesserts: [...state.chosenDesserts, action.chosenDessert],
+      };
+    case types.REMOVE_DESSERT:
+      return {
+        ...state,
+        chosenDesserts: state.chosenDesserts.filter(dessert => dessert !== action.chosenDessert),
+      };
+    default:
+      return state;
+  }
+}
+
+function getAirtableReducer(state = defaults, action) {
   console.log(action); // just for debugging
   switch (action.type) {
     case types.AIRTABLE_GET_REQUESTED: return {
@@ -38,3 +57,10 @@ export default function rootReducer(state = defaults, action) {
     default: return state;
   }
 }
+
+const rootReducer = combineReducers({
+  getAirtable: getAirtableReducer,
+  desserts: dessertsReducer,
+});
+
+export default rootReducer;
