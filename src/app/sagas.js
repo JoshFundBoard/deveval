@@ -9,10 +9,6 @@ import axios from 'axios';
 import * as types from './actionTypes';
 
 function postChoices(data) {
-  /*
-    The data returned from the UI will need to be sent to the API in this format. You could do that
-    in the UI code, but it's better to do it here.
-  */
   const postData = {
     records: [
       {
@@ -31,27 +27,6 @@ function postChoices(data) {
     if (r.fields.choices.length < 3) throw new Error('Three choices are required.');
   });
 
-  /*
-    This function (postChoices) should be called from a work function, using a similar pattern to
-    the way the dessert data is pulled in below.
-
-    You don't have access to the Airtable base being called, but you can tell if your code worked
-    by looking at the data returned. Airtable will send a response that looks like:
-
-    records: [
-        {
-            "id": "recX4FiYNIuId5IWQ",
-            "fields": {
-                "name": "test2",
-                "choices": [
-                    "cake",
-                    "flan",
-                ]
-            },
-            "createdTime": "2021-01-19T17:20:48.000Z"
-        }
-    ]
-  */
   return axios({
     method: 'post',
     url: 'https://api.airtable.com/v0/appGSCyWcJcgauVi2/results',
@@ -77,8 +52,7 @@ function* workGetAirTable() {
     const result = yield call(getMenu);
 
     const { data } = result;
-    // This is here to handle airtable errors getting returned a little weirdly. Feel free to make
-    // improvements to it if you really want to.
+
     if (data.error) throw new Error(data.error);
     yield put({ type: types.AIRTABLE_GET_SUCCEEDED, data });
     yield delay(1500);
@@ -97,8 +71,7 @@ function* workPostAirTable(postData) {
     const result = yield call(postChoices, postData);
 
     const { data } = result;
-    // This is here to handle airtable errors getting returned a little weirdly. Feel free to make
-    // improvements to it if you really want to.
+
     if (data.error) throw new Error(data.error);
     yield put({ type: types.AIRTABLE_POST_SUCCEEDED, data });
     yield delay(1500);
