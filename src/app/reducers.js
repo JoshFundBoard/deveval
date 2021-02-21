@@ -45,7 +45,6 @@ function dessertsReducer(state = defaults, action) {
 }
 
 function getAirtableReducer(state = defaults, action) {
-  console.log(action); // just for debugging
   switch (action.type) {
     case types.AIRTABLE_GET_REQUESTED: return {
       ...state,
@@ -64,7 +63,29 @@ function getAirtableReducer(state = defaults, action) {
     case types.AIRTABLE_GET_DISMISSED: return {
       ...state,
       get_status: '',
-      // This is so you can dismiss status alerts
+    };
+    default: return state;
+  }
+}
+
+function postAirtableReducer(state = defaults, action) {
+  switch (action.type) {
+    case types.AIRTABLE_POST_REQUESTED: return {
+      ...state,
+      post_status: 'pending',
+    };
+    case types.AIRTABLE_POST_SUCCEEDED:
+      return {
+        ...state,
+        post_status: 'succeeded',
+      };
+    case types.AIRTABLE_POST_FAILED: return {
+      ...state,
+      post_status: processErr(action.error),
+    };
+    case types.AIRTABLE_POST_DISMISSED: return {
+      ...state,
+      post_status: '',
     };
     default: return state;
   }
@@ -72,6 +93,7 @@ function getAirtableReducer(state = defaults, action) {
 
 const rootReducer = combineReducers({
   getAirtable: getAirtableReducer,
+  postAirtable: postAirtableReducer,
   desserts: dessertsReducer,
   user: userReducer,
 });

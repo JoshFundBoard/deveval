@@ -28,6 +28,7 @@ library.add(
 
 function App() {
   const getStatus = useSelector(state => state.getAirtable.get_status);
+  const postStatus = useSelector(state => state.postAirtable.post_status);
   const desserts = useSelector(state => state.getAirtable.desserts) || [];
   const chosenDesserts = useSelector(state => state.desserts.chosenDesserts);
   const userName = useSelector(state => state.user.user);
@@ -61,6 +62,14 @@ function App() {
     dispatch({
       type: types.SET_NAME,
       user: e.target.value,
+    });
+  };
+
+  const handleSave = () => {
+    dispatch({
+      type: types.AIRTABLE_POST_REQUESTED,
+      user: userName,
+      chosenDesserts,
     });
   };
 
@@ -118,7 +127,10 @@ function App() {
                   aria-label="Enter your name"
                 />
               </InputGroup>
-              <Button variant="primary">
+              <div className="mb-2">
+                {`Post Status: ${postStatus}`}
+              </div>
+              <Button onClick={handleSave} variant="primary">
                 Save
               </Button>
             </Col>
