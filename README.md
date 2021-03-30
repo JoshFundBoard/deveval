@@ -27,7 +27,9 @@ Code is already in place to pull a menu of possible desserts from Airtable. You 
 6. When the user clicks the save button their choices should be recorded in Airtable. The saga file already has a postChoices function for this, you just need to write the saga code to listen for the Redux action to trigger it, as well as the reducer code for it.
 7. Show a message for the current status of the save, any errors, and whether it succeeded. This can go wherever you like, next to the save button is fine.
 
-You're not being tested on your design skills, an example layout screenshot is provided in the imgs folder. But if you enjoy design feel free to add your own enhancements.
+If you're applying for a developer-only position, you're not going to be judged on your design skills. An example layout screenshot is provided in the imgs folder, but as long as it works we don't care what it looks like.
+
+If you're applying for a position that includes UX skills, please do your best to create both a good user experience and an ascetically pleasing one. But you should also be aware that's not the focus of this exercise, put most of your energy into the code not the UX. You are expected to use the included basic styles, which match the ones used on http://app.fundboard.co 
 
 ### Going Farther
 
