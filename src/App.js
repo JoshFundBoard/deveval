@@ -17,12 +17,7 @@ import Logo from './imgs/FundBoard_Logo.svg';
 import store from './app/store';
 import * as types from './app/actionTypes';
 
-library.add(
-  fab,
-  faExclamationTriangle,
-  faFileUpload,
-  faSave,
-);
+library.add(fab, faExclamationTriangle, faFileUpload, faSave);
 
 function App() {
   const getStatus = useSelector(state => state.get_status);
@@ -37,6 +32,25 @@ function App() {
     });
   }, [dispatch]);
 
+  const validDesserts = desserts
+    .filter(dessert => dessert !== undefined)
+    .sort();
+
+  const buttonList = validDesserts.map(validDessert => (
+    <div className="container p-0">
+      <ul className="list-group">
+        <li className="list-group-item p-0">
+          <Button
+            variant="info"
+            className="w-100 btnNoMax mb-2 list-group-item"
+          >
+            {validDessert}
+          </Button>
+        </li>
+      </ul>
+    </div>
+  ));
+
   return (
     <Provider store={store}>
       <Navbar className="nav">
@@ -50,29 +64,17 @@ function App() {
           <Row>
             <Col>
               <div className="mt-4 mb-2">
-                <h1 className="text-center">
-                  Choose a Dessert
-                </h1>
+                <h1 className="text-center">Choose a Dessert</h1>
                 <p className="text-center">Choose up to 3 desserts.</p>
               </div>
             </Col>
           </Row>
           <Row>
             <Col md={{ span: 6, offset: 3 }}>
-              <div className="mb-2">
-                {`Get Status: ${getStatus}`}
-              </div>
+              <div className="mb-2">{`Get Status: ${getStatus}`}</div>
               <div className="d-flex flex-wrap">
-                <Button
-                  variant="info"
-                  className="w-100 btnNoMax mb-2"
-                >
-                  Example button
-                </Button>
-                <Button
-                  variant="secondary"
-                  className="w-100 btnNoMax mb-2"
-                >
+                {buttonList}
+                <Button variant="secondary" className="w-100 btnNoMax mb-2">
                   Example selected button
                 </Button>
               </div>
@@ -84,9 +86,7 @@ function App() {
                   aria-label="Enter your name"
                 />
               </InputGroup>
-              <Button variant="primary">
-                Save
-              </Button>
+              <Button variant="primary">Save</Button>
             </Col>
           </Row>
         </div>
