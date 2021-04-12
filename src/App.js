@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch, Provider } from 'react-redux';
 import Navbar from 'react-bootstrap/Navbar';
 import Row from 'react-bootstrap/Row';
@@ -32,6 +32,13 @@ function App() {
     });
   }, [dispatch]);
 
+  const [selected, setSelected] = useState([]);
+
+  const addToSelected = validDessert => {
+    setSelected([...selected, validDessert]);
+  };
+  console.log(selected);
+
   const validDesserts = desserts
     .filter(dessert => dessert !== undefined)
     .sort();
@@ -39,9 +46,11 @@ function App() {
   const buttonList = validDesserts.map(validDessert => (
     <div className="container p-0">
       <ul className="list-group">
-        <li className="list-group-item p-0">
+        <li key={validDessert.substring(0, 3)} className="list-group-item p-0">
+          {console.log(validDessert.substring(0, 3))}
           <Button
-            variant="info"
+            onClick={() => addToSelected(validDessert)}
+            variant={selected ? 'info' : 'secondary'}
             className="w-100 btnNoMax mb-2 list-group-item"
           >
             {validDessert}
@@ -50,6 +59,8 @@ function App() {
       </ul>
     </div>
   ));
+
+  const selectionLength = selected.length > 3;
 
   return (
     <Provider store={store}>
@@ -66,6 +77,7 @@ function App() {
               <div className="mt-4 mb-2">
                 <h1 className="text-center">Choose a Dessert</h1>
                 <p className="text-center">Choose up to 3 desserts.</p>
+                <p className="text-center">{selectionLength ? 'You Have Already 3 Desserts' : `Please Select ${3 - selected.length} Desserts`}</p>
               </div>
             </Col>
           </Row>
