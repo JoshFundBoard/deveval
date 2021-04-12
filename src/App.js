@@ -16,12 +16,14 @@ import {
 import Logo from './imgs/FundBoard_Logo.svg';
 import store from './app/store';
 import * as types from './app/actionTypes';
+import { postChoices } from './app/sagas';
 
 library.add(fab, faExclamationTriangle, faFileUpload, faSave);
 
 function App() {
   const getStatus = useSelector(state => state.get_status);
   const desserts = useSelector(state => state.desserts) || [];
+  const name = useSelector(state => state.name) || '';
   console.log(desserts); // just here so eslint doesn't complain. And handy for debugging.
 
   const dispatch = useDispatch();
@@ -35,7 +37,11 @@ function App() {
   const [selected, setSelected] = useState([]);
 
   const addToSelected = validDessert => {
-    setSelected([...selected, validDessert]);
+    if (selected.length <= 2 && !selected.includes(validDessert)) {
+      setSelected([...selected, validDessert]);
+    } else if (selected.length >= 3) {
+      alert('stop');
+    }
   };
   console.log(selected);
 
@@ -62,6 +68,12 @@ function App() {
 
   const selectionLength = selected.length > 3;
 
+  const handleClick = () => {
+    postChoices({
+      name, choices: selected,
+    });
+  };
+
   return (
     <Provider store={store}>
       <Navbar className="nav">
@@ -77,7 +89,11 @@ function App() {
               <div className="mt-4 mb-2">
                 <h1 className="text-center">Choose a Dessert</h1>
                 <p className="text-center">Choose up to 3 desserts.</p>
-                <p className="text-center">{selectionLength ? 'You Have Already 3 Desserts' : `Please Select ${3 - selected.length} Desserts`}</p>
+                <p className="text-center">
+                  {selectionLength
+                    ? 'You Have Already 3 Desserts'
+                    : `Please Select ${3 - selected.length} Desserts`}
+                </p>
               </div>
             </Col>
           </Row>
@@ -93,12 +109,13 @@ function App() {
               <InputGroup className="mb-2 p-1">
                 <FormControl
                   type="text"
-                  value=""
+                  value={name}
+                  onChange={e => dispatch({ type: types.UPDATE_NAME, payload: e.target.value })}
                   placeholder="Enter your name"
                   aria-label="Enter your name"
                 />
               </InputGroup>
-              <Button variant="primary">Save</Button>
+              <Button onClick={handleClick} variant="primary">Save</Button>
             </Col>
           </Row>
         </div>

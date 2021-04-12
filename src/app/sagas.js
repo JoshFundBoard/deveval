@@ -1,25 +1,23 @@
 import {
-  fork,
-  put,
-  call,
-  takeEvery,
+  fork, put, call, takeEvery,
 } from 'redux-saga/effects';
 import axios from 'axios';
 import * as types from './actionTypes';
 
 // remove this disable when you start using this function.
 // eslint-disable-next-line no-unused-vars
-function postChoices(data) {
+export function postChoices(info) {
   /*
     The data returned from the UI will need to be sent to the API in this format. You could do that
     in the UI code, but it's better to do it here.
   */
-  const exampleData = {
+  const { choices, name } = info;
+  const data = {
     records: [
       {
         fields: {
-          name: 'Test User',
-          choices: ['cake', 'pie', 'fruit'],
+          name,
+          choices,
         },
       },
     ],
@@ -59,7 +57,7 @@ function postChoices(data) {
     headers: {
       Authorization: 'Bearer keym1B881Ly2v7cNw',
     },
-    data: exampleData,
+    data,
   });
 }
 

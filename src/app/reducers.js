@@ -35,6 +35,10 @@ export default function rootReducer(state = defaults, action) {
       get_status: '',
       // This is so you can dismiss status alerts
     };
+    case types.UPDATE_NAME: return {
+      ...state,
+      name: action.payload,
+    };
     default: return state;
   }
 }
