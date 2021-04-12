@@ -66,8 +66,6 @@ function App() {
     </div>
   ));
 
-  const selectionLength = selected.length > 3;
-
   const handleClick = () => {
     postChoices({
       name, choices: selected,
@@ -89,11 +87,6 @@ function App() {
               <div className="mt-4 mb-2">
                 <h1 className="text-center">Choose a Dessert</h1>
                 <p className="text-center">Choose up to 3 desserts.</p>
-                <p className="text-center">
-                  {selectionLength
-                    ? 'You Have Already 3 Desserts'
-                    : `Please Select ${3 - selected.length} Desserts`}
-                </p>
               </div>
             </Col>
           </Row>
