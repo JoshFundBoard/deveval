@@ -3,23 +3,36 @@ import {
   put,
   call,
   takeEvery,
+  all,
 } from 'redux-saga/effects';
 import axios from 'axios';
 import * as types from './actionTypes';
 
 // remove this disable when you start using this function.
 // eslint-disable-next-line no-unused-vars
-function postChoices(data) {
+function postChoices(rawData) {
+  // console.log('INSIDE POST CHOICES', data);
+  const { name, choices } = rawData;
   /*
     The data returned from the UI will need to be sent to the API in this format. You could do that
     in the UI code, but it's better to do it here.
   */
-  const exampleData = {
+  // const exampleData = {
+  //   records: [
+  //     {
+  //       fields: {
+  //         name: 'Test User',
+  //         choices: ['cake', 'pie', 'fruit'],
+  //       },
+  //     },
+  //   ],
+  // };
+  const data = {
     records: [
       {
         fields: {
-          name: 'Test User',
-          choices: ['cake', 'pie', 'fruit'],
+          name,
+          choices,
         },
       },
     ],
@@ -59,7 +72,7 @@ function postChoices(data) {
     headers: {
       Authorization: 'Bearer keym1B881Ly2v7cNw',
     },
-    data: exampleData,
+    data,
   });
 }
 
@@ -87,10 +100,30 @@ function* workGetAirTable() {
   }
 }
 
+function* workPostData(postData) {
+  try {
+    const result = yield call(() => postChoices(postData));
+    const { data } = result;
+    // This is here to handle airtable errors getting returned a little weirdly. Feel free to make
+    // improvements to it if you really want to.
+    if (data.error) throw new Error(data.error);
+    yield put({ type: types.POST_DESSERT_DATA_SUCCEEDED, data });
+  } catch (error) {
+    yield put({ type: types.POST_DESSERT_DATA_FAILED, error });
+  }
+}
+
 export function* watchGetAirTable() {
   yield takeEvery(types.AIRTABLE_GET_REQUESTED, workGetAirTable);
 }
 
+export function* watchPostData() {
+  yield takeEvery(types.POST_DESSERT_DATA_REQUESTED, data => workPostData(data));
+}
+
 export default function* rootSaga() {
-  yield fork(watchGetAirTable);
+  yield all([
+    fork(watchGetAirTable),
+    fork(watchPostData),
+  ]);
 }

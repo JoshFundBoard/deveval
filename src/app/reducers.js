@@ -20,12 +20,16 @@ export default function rootReducer(state = defaults, action) {
       ...state,
       get_status: 'pending',
     };
-    case types.AIRTABLE_GET_SUCCEEDED:
+    case types.AIRTABLE_GET_SUCCEEDED: {
+      const rawDesserts = action.data.records.map(r => r.fields.value);
+      const validDesserts = rawDesserts.filter(element => !!element);
+      const sortedDesserts = validDesserts.sort();
       return {
         ...state,
         get_status: 'succeeded',
-        desserts: action.data.records.map(r => r.fields.value),
+        desserts: sortedDesserts,
       };
+    }
     case types.AIRTABLE_GET_FAILED: return {
       ...state,
       get_status: processErr(action.error),
@@ -34,6 +38,18 @@ export default function rootReducer(state = defaults, action) {
       ...state,
       get_status: '',
       // This is so you can dismiss status alerts
+    };
+    case types.POST_DESSERT_DATA_REQUESTED: return {
+      ...state,
+      post_status: 'saving...',
+    };
+    case types.POST_DESSERT_DATA_SUCCEEDED: return {
+      ...state,
+      post_status: 'saved.',
+    };
+    case types.POST_DESSERT_DATA_FAILED: return {
+      ...state,
+      post_status: processErr(action.error),
     };
     default: return state;
   }

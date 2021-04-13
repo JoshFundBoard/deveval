@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch, Provider } from 'react-redux';
 import Navbar from 'react-bootstrap/Navbar';
 import Row from 'react-bootstrap/Row';
@@ -25,9 +25,13 @@ library.add(
 );
 
 function App() {
+  const [choices, setChoices] = useState([]);
+  const [errorMessage, setErrorMessage] = useState(undefined);
+  const [name, setName] = useState('');
+
   const getStatus = useSelector(state => state.get_status);
+  const postStatus = useSelector(state => state.post_status);
   const desserts = useSelector(state => state.desserts) || [];
-  console.log(desserts); // just here so eslint doesn't complain. And handy for debugging.
 
   const dispatch = useDispatch();
 
@@ -36,6 +40,18 @@ function App() {
       type: types.AIRTABLE_GET_REQUESTED,
     });
   }, [dispatch]);
+
+  const handleClick = (dessert, isSelected) => {
+    setErrorMessage(undefined);
+    if (isSelected) {
+      const newSelected = choices.filter(el => el !== dessert);
+      setChoices(newSelected);
+    } else if (choices.length >= 3) {
+      setErrorMessage('You have already selected the maximum number of desserts');
+    } else {
+      setChoices([...choices, dessert]);
+    }
+  };
 
   return (
     <Provider store={store}>
@@ -62,31 +78,50 @@ function App() {
               <div className="mb-2">
                 {`Get Status: ${getStatus}`}
               </div>
+              <div className="mb-2">
+                {errorMessage}
+              </div>
               <div className="d-flex flex-wrap">
-                <Button
-                  variant="info"
-                  className="w-100 btnNoMax mb-2"
-                >
-                  Example button
-                </Button>
-                <Button
-                  variant="secondary"
-                  className="w-100 btnNoMax mb-2"
-                >
-                  Example selected button
-                </Button>
+                {desserts.map(dessert => {
+                  const isSelected = choices.includes(dessert);
+                  return (
+                    <Button
+                      key={dessert}
+                      variant={isSelected ? 'secondary' : 'info'}
+                      className="w-100 btnNoMax mb-2"
+                      onClick={() => handleClick(dessert, isSelected)}
+                    >
+                      {dessert}
+                    </Button>
+                  );
+                })}
               </div>
               <InputGroup className="mb-2 p-1">
                 <FormControl
                   type="text"
-                  value=""
+                  defaultValue=""
                   placeholder="Enter your name"
                   aria-label="Enter your name"
+                  onChange={e => setName(e.target.value)}
                 />
               </InputGroup>
-              <Button variant="primary">
+              <Button
+                variant="primary"
+                disabled={choices.length !== 3 || !name}
+                onClick={() => {
+                  setErrorMessage(undefined);
+                  dispatch({
+                    type: types.POST_DESSERT_DATA_REQUESTED,
+                    name,
+                    choices,
+                  });
+                }}
+              >
                 Save
               </Button>
+              <div className="mb-2">
+                {`Post Status: ${postStatus}`}
+              </div>
             </Col>
           </Row>
         </div>
