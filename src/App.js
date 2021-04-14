@@ -4,6 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
 import FormControl from 'react-bootstrap/FormControl';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -35,12 +36,16 @@ function App() {
   }, [dispatch]);
 
   const [selected, setSelected] = useState([]);
+  const [alertStatus, setAlertStatus] = useState(null);
 
   const addToSelected = validDessert => {
     if (selected.length <= 2 && !selected.includes(validDessert)) {
       setSelected([...selected, validDessert]);
     } else if (selected.length >= 3) {
-      alert('stop');
+      setAlertStatus({
+        success: false,
+        message: 'too many items selected',
+      });
     }
   };
   console.log(selected);
@@ -53,10 +58,9 @@ function App() {
     <div className="container p-0">
       <ul className="list-group">
         <li key={validDessert.substring(0, 3)} className="list-group-item p-0">
-          {console.log(validDessert.substring(0, 3))}
           <Button
             onClick={() => addToSelected(validDessert)}
-            variant={selected ? 'info' : 'secondary'}
+            variant={selected.includes(validDessert) ? 'secondary' : 'info'}
             className="w-100 btnNoMax mb-2 list-group-item"
           >
             {validDessert}
@@ -67,9 +71,21 @@ function App() {
   ));
 
   const handleClick = () => {
-    postChoices({
-      name, choices: selected,
-    });
+    try {
+      postChoices({
+        name,
+        choices: selected,
+      });
+      setAlertStatus({
+        success: true,
+        message: `${name} has submitted ${selected.join(', ')}`,
+      });
+    } catch (e) {
+      setAlertStatus({
+        success: false,
+        message: e.message,
+      });
+    }
   };
 
   return (
@@ -95,9 +111,6 @@ function App() {
               <div className="mb-2">{`Get Status: ${getStatus}`}</div>
               <div className="d-flex flex-wrap">
                 {buttonList}
-                <Button variant="secondary" className="w-100 btnNoMax mb-2">
-                  Example selected button
-                </Button>
               </div>
               <InputGroup className="mb-2 p-1">
                 <FormControl
@@ -108,10 +121,17 @@ function App() {
                   aria-label="Enter your name"
                 />
               </InputGroup>
-              <Button onClick={handleClick} variant="primary">Save</Button>
+              <Button onClick={handleClick} variant="primary">
+                Save
+              </Button>
             </Col>
           </Row>
         </div>
+        {alertStatus && (
+          <div style={{ position: 'fixed', top: '440px', right: '500px' }}>
+            <Alert variant={alertStatus.success ? 'success' : 'danger'} dismissible onClose={() => setAlertStatus(null)}>{alertStatus.message}</Alert>
+          </div>
+        )}
       </main>
     </Provider>
   );
