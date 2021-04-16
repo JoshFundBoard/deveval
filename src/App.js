@@ -44,7 +44,7 @@ function App() {
     } else if (selected.length >= 3) {
       setAlertStatus({
         success: false,
-        message: 'too many items selected',
+        message: 'Too many desserts selected.',
       });
     }
   };
@@ -57,7 +57,7 @@ function App() {
   const buttonList = validDesserts.map(validDessert => (
     <div className="container p-0">
       <ul className="list-group">
-        <li key={validDessert.substring(0, 3)} className="list-group-item p-0">
+        <li key={validDessert.substring(0, 3)} className="list-group-item p-0 border-0">
           <Button
             onClick={() => addToSelected(validDessert)}
             variant={selected.includes(validDessert) ? 'secondary' : 'info'}
@@ -99,11 +99,16 @@ function App() {
       <main id="Main">
         <div className="container-xl">
           <Row>
-            <Col>
+            <Col md={{ span: 6, offset: 3 }}>
               <div className="mt-4 mb-2">
                 <h1 className="text-center">Choose a Dessert</h1>
                 <p className="text-center">Choose up to 3 desserts.</p>
               </div>
+              {alertStatus && (
+              <div className="container-xxs">
+                <Alert className="button mt-3 mb-3 text-center display:inline-block" variant={alertStatus.success ? 'success' : 'danger'} dismissible onClose={() => setAlertStatus(null)}>{alertStatus.message}</Alert>
+              </div>
+              )}
             </Col>
           </Row>
           <Row>
@@ -127,11 +132,6 @@ function App() {
             </Col>
           </Row>
         </div>
-        {alertStatus && (
-          <div style={{ position: 'fixed', top: '440px', right: '500px' }}>
-            <Alert variant={alertStatus.success ? 'success' : 'danger'} dismissible onClose={() => setAlertStatus(null)}>{alertStatus.message}</Alert>
-          </div>
-        )}
       </main>
     </Provider>
   );
