@@ -36,7 +36,7 @@ function App() {
   }, [dispatch]);
 
   const [selected, setSelected] = useState([]);
-  const [alertStatus, setAlertStatus] = useState(null);
+  const [alertStatus, setAlertStatus] = useState('');
 
   const addToSelected = validDessert => {
     if (selected.length <= 2 && !selected.includes(validDessert)) {
@@ -51,7 +51,7 @@ function App() {
   console.log(selected);
 
   const validDesserts = desserts
-    .filter(dessert => dessert !== undefined)
+    .filter(dessert => dessert)
     .sort();
 
   const buttonList = validDesserts.map(validDessert => (
