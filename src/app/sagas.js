@@ -4,13 +4,7 @@ import {
 import axios from 'axios';
 import * as types from './actionTypes';
 
-// remove this disable when you start using this function.
-// eslint-disable-next-line no-unused-vars
-export function postChoices(info) {
-  /*
-    The data returned from the UI will need to be sent to the API in this format. You could do that
-    in the UI code, but it's better to do it here.
-  */
+function postChoices(info) {
   const { choices, name } = info;
   const data = {
     records: [
@@ -30,27 +24,6 @@ export function postChoices(info) {
     if (r.fields.choices.length < 3) throw new Error('Three choices are required.');
   });
 
-  /*
-    This function (postChoices) should be called from a work function, using a similar pattern to
-    the way the dessert data is pulled in below.
-
-    You don't have access to the Airtable base being called, but you can tell if your code worked
-    by looking at the data returned. Airtable will send a response that looks like:
-
-    records: [
-        {
-            "id": "recX4FiYNIuId5IWQ",
-            "fields": {
-                "name": "test2",
-                "choices": [
-                    "cake",
-                    "flan",
-                ]
-            },
-            "createdTime": "2021-01-19T17:20:48.000Z"
-        }
-    ]
-  */
   return axios({
     method: 'post',
     url: 'https://api.airtable.com/v0/appGSCyWcJcgauVi2/results',
@@ -74,10 +47,7 @@ function getMenu() {
 function* workGetAirTable() {
   try {
     const result = yield call(getMenu);
-
     const { data } = result;
-    // This is here to handle airtable errors getting returned a little weirdly. Feel free to make
-    // improvements to it if you really want to.
     if (data.error) throw new Error(data.error);
     yield put({ type: types.AIRTABLE_GET_SUCCEEDED, data });
   } catch (error) {
@@ -85,10 +55,28 @@ function* workGetAirTable() {
   }
 }
 
+function* workPostAirTable(action) {
+  try {
+    const result = yield call(() => postChoices(action.payload));
+    const { data } = result;
+    if (data.error) throw new Error(data.error);
+    const { name, choices } = data.records[0].fields;
+    const message = `Hi ${name}, ${choices.join(', ')} are great choices!`;
+    yield put({ type: types.AIRTABLE_POST_SUCCEEDED, message });
+  } catch (error) {
+    yield put({ type: types.AIRTABLE_POST_FAILED, error });
+  }
+}
+
 export function* watchGetAirTable() {
   yield takeEvery(types.AIRTABLE_GET_REQUESTED, workGetAirTable);
 }
 
+export function* watchPostAirTable() {
+  yield takeEvery(types.AIRTABLE_POST_REQUESTED, workPostAirTable);
+}
+
 export default function* rootSaga() {
   yield fork(watchGetAirTable);
+  yield fork(watchPostAirTable);
 }

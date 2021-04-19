@@ -17,12 +17,15 @@ import {
 import Logo from './imgs/FundBoard_Logo.svg';
 import store from './app/store';
 import * as types from './app/actionTypes';
-import { postChoices } from './app/sagas';
+import { capitalizeFirstLetter } from './app/utils';
 
 library.add(fab, faExclamationTriangle, faFileUpload, faSave);
 
 function App() {
   const getStatus = useSelector(state => state.get_status);
+  const postStatus = useSelector(state => state.post_status);
+  const postMessage = useSelector(state => state.post_message);
+  const alertStatus = useSelector(state => state.alert_status);
   const desserts = useSelector(state => state.desserts) || [];
   const name = useSelector(state => state.name) || '';
   console.log(desserts); // just here so eslint doesn't complain. And handy for debugging.
@@ -36,19 +39,19 @@ function App() {
   }, [dispatch]);
 
   const [selected, setSelected] = useState([]);
-  const [alertStatus, setAlertStatus] = useState('');
 
   const addToSelected = validDessert => {
     if (selected.length <= 2 && !selected.includes(validDessert)) {
       setSelected([...selected, validDessert]);
+    } else if (selected.includes(validDessert)) {
+      setSelected(selected.filter(dessert => dessert !== validDessert));
     } else if (selected.length >= 3) {
-      setAlertStatus({
-        success: false,
-        message: 'Too many desserts selected.',
+      dispatch({
+        type: types.ALERT_REQUESTED,
+        payload: 'Too many desserts selected.',
       });
     }
   };
-  console.log(selected);
 
   const validDesserts = desserts
     .filter(dessert => dessert)
@@ -57,7 +60,7 @@ function App() {
   const buttonList = validDesserts.map(validDessert => (
     <div className="container p-0">
       <ul className="list-group">
-        <li key={validDessert.substring(0, 3)} className="list-group-item p-0 border-0">
+        <li key={validDessert} className="list-group-item p-0 border-0">
           <Button
             onClick={() => addToSelected(validDessert)}
             variant={selected.includes(validDessert) ? 'secondary' : 'info'}
@@ -71,21 +74,8 @@ function App() {
   ));
 
   const handleClick = () => {
-    try {
-      postChoices({
-        name,
-        choices: selected,
-      });
-      setAlertStatus({
-        success: true,
-        message: `${name} has submitted ${selected.join(', ')}`,
-      });
-    } catch (e) {
-      setAlertStatus({
-        success: false,
-        message: e.message,
-      });
-    }
+    const info = { name, choices: selected };
+    dispatch({ type: types.AIRTABLE_POST_REQUESTED, payload: info });
   };
 
   return (
@@ -104,9 +94,14 @@ function App() {
                 <h1 className="text-center">Choose a Dessert</h1>
                 <p className="text-center">Choose up to 3 desserts.</p>
               </div>
+              {postStatus && (
+              <div className="container-xxs">
+                <Alert className="button mt-3 mb-3 text-center display:inline-block" variant={postStatus === 'succeeded' ? 'success' : 'danger'} dismissible onClose={() => dispatch({ type: types.AIRTABLE_POST_DISMISSED })}>{postMessage}</Alert>
+              </div>
+              )}
               {alertStatus && (
               <div className="container-xxs">
-                <Alert className="button mt-3 mb-3 text-center display:inline-block" variant={alertStatus.success ? 'success' : 'danger'} dismissible onClose={() => setAlertStatus(null)}>{alertStatus.message}</Alert>
+                <Alert className="button mt-3 mb-3 text-center display:inline-block" variant={alertStatus === 'succeeded' ? 'success' : 'danger'} dismissible onClose={() => dispatch({ type: types.ALERT_DISMISSED })}>{capitalizeFirstLetter(alertStatus)}</Alert>
               </div>
               )}
             </Col>
